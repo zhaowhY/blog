@@ -15,7 +15,7 @@ var swapNumbers = function (numbers) {
   // // 2, 逗号, 从左到右运算特性
   // a = b + (b = a, 0)
 
-  return [a, b]
+  return [a, b];
 };
 
-console.log(swapNumbers([1, 2])) // [2,1]
+console.log(swapNumbers([1, 2])); // [2,1]
