@@ -1,6 +1,1 @@
-
-let a = 1;
-let b = 2
-
-[a, b] = [b, a];
-console.log(a.b);
+new Array(3).map((item) => [1])
