@@ -1,22 +1,27 @@
 /**
  * @description 节流，将高频操作转化为每隔一段时间执行一次，比如监测浏览器滚动事件和缩放事件
- * @param {Function} func 执行函数
- * @param {Number} delay 节流时长
  */
 
-let timer = null;
 function throttle(func, delay = 120) {
-  if (timer) return;
-  timer = setTimeout(() => {
-    func();
-    timer = null;
-  }, Number(delay));
+  let timer = null;
+  return function (...args) {
+    if (timer) return;
+    timer = setTimeout(() => { // 箭头函数，则不用写func.apply(_this, val)
+      func(...args);
+      timer = null;
+    }, delay);
+  };
 }
+
+
+// 验证函数正确性
+function tempFunc(...args) {
+  console.log(args);
+}
+const temp = throttle(tempFunc, 1000);
 
 let i = 0;
 setInterval(() => {
-  throttle(() => {
-    console.log(i)
-  }, 1000)
-  i++
-}, 200);
+  temp('val', i);
+  i++;
+}, 200); // 0 5 10 ...
