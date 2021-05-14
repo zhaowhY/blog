@@ -8,8 +8,8 @@ function debounce(func, delay = 120) {
   let timer = null;
   return function (...args) {
     if (timer) clearTimeout(timer);
-    timer = setTimeout(() => { // 箭头函数，则不用写func.apply(_this, val)
-      func(...args);
+    timer = setTimeout(() => {
+      func.apply(this, args);
     }, delay);
   };
 }
