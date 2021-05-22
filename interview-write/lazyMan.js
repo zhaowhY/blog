@@ -1,36 +1,35 @@
 // 实现一个LazyMan，可以按照以下方式调用:
-// LazyMan("Hank")输出:
+// lazyMan("Hank")输出:
 // Hi! This is Hank!
 //  
-// LazyMan("Hank").sleep(10).eat("dinner")输出
+// lazyMan("Hank").sleep(10).eat("dinner")输出
 // Hi! This is Hank!
 // //等待10秒..
 // Wake up after 10
 // Eat dinner~
 //  
-// LazyMan("Hank").eat("dinner").eat("supper")输出
+// lazyMan("Hank").eat("dinner").eat("supper")输出
 // Hi This is Hank!
 // Eat dinner~
 // Eat supper~
 //  
-// LazyMan("Hank").sleepFirst(5).eat("supper")输出
+// lazyMan("Hank").sleepFirst(5).eat("supper")输出
 // //等待5秒
 // Wake up after 5
 // Hi This is Hank!
 // Eat supper
 //  
-// 以此类推。
 
 class LazyMan {
   constructor(name) {
     this.name = name;
-    this.task = [() => hello];
-    setTimeout(this.next, 0);
+    this.task = [() => { this.hello(); }];
+    setTimeout(() => {
+      this.next();
+    }, 0);
   }
 
   next() {
-    console.log(this.task);
-    console.log(this.task.length);
     if (this.task.length > 0) {
       this.task.shift()();
     }
@@ -49,7 +48,7 @@ class LazyMan {
         setTimeout(() => {
           console.log('Wake up after ' + delay);
           this.next();
-        }, delay);
+        }, delay * 1000);
       }
     );
     return this;
@@ -62,7 +61,7 @@ class LazyMan {
         setTimeout(() => {
           console.log('Wake up after ' + delay);
           this.next();
-        }, delay);
+        }, delay * 1000);
       }
     );
     return this;
@@ -71,13 +70,18 @@ class LazyMan {
   eat(food) {
     this.task.push(() => {
       console.log(`Eat ${food}!`);
+      this.next();
+
     });
-    this.next();
     return this;
   }
 }
-new LazyMan("Hank").sleepFirst(5).eat("supper");
+const lazyMan = (name) => new LazyMan(name);
 
+// lazyMan("Hank");
+lazyMan("Hank").sleep(3).eat("dinner");
+// lazyMan("Hank").eat("dinner").eat("supper");
+// lazyMan("Hank").sleepFirst(3).eat("supper");
 
 
 
