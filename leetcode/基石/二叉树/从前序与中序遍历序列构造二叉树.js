@@ -1,6 +1,6 @@
 /**
  * @link https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
- * @description 不断从左右子树角度拆分中序遍历， 从前序遍历中查找左右子树的根节点
+ * @description 不断从左右子树角度拆分中序遍历， 从前序遍历中查找左右子树的根节点, 无效值返回null
  */
 
 function TreeNode(val, left, right) {
