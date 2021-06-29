@@ -21,23 +21,19 @@ var exist = function (board, word) {
 
 
   function dfs(x, y, word) {
-    console.log(word);
     if (!word) return true;
+
     const xDir = [-1, 0, 1, 0];
     const yDir = [0, 1, 0, -1];
     visit[x][y] = true;
     for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 4; j++) {
-        const curX = x + xDir[i];
-        const curY = y + yDir[j];
-        if (word === 'D') {
-          console.log(x, y, curX, curY);
-        }
-        if (curX < 0 || curY < 0 || curX > xlen - 1 || curY > ylen - 1) continue;
+      const curX = x + xDir[i];
+      const curY = y + yDir[i];
+      if (curX < 0 || curY < 0 || curX > xlen - 1 || curY > ylen - 1) continue;
 
-        if (!visit[curX][curY] && board[curX][curY] === word[0]) {
-          return dfs(x + xDir[i], y + yDir[j], word.slice(1));
-        }
+      if (!visit[curX][curY] && board[curX][curY] === word[0]) {
+        const bool = dfs(x + xDir[i], y + yDir[i], word.slice(1));
+        if (bool) return bool;
       }
     }
     visit[x][y] = false;
@@ -55,4 +51,22 @@ var exist = function (board, word) {
   return false;
 };
 
+
+console.log(exist([
+  ["A", "B", "E"],
+  ["B", "C", "D"]],
+  'ABCDEB')); // true
 console.log(exist([["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]], 'ABCCED')); // true
+console.log(exist([["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]], 'SEE')); // true
+console.log(exist([["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]], 'ABCB')); // false
+console.log(exist([
+  ["a", "a", "b", "a", "a", "b"],
+  ["b", "a", "b", "a", "b", "b"],
+  ["b", "a", "b", "b", "b", "b"],
+  ["a", "a", "b", "a", "b", "a"],
+  ["b", "b", "a", "a", "a", "b"],
+  ["b", "b", "b", "a", "b", "a"]], 'aaaababab')); // true
+
+// "A", "B", "C", "E";
+// "S", "F", "C", "S";
+// "A", "D", "E", "E";
