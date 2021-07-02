@@ -9,44 +9,44 @@
  * @return {string[]}
  */
 
-// var restoreIpAddresses = function (s) {
-//   if (!s || s.length < 4 || s.length > 3 * 4) return [];
-//   const result = [];
-//   const dp = [];
-//   function dfs(s, path) {
-//     const pathLen = path.split('.').length;
-//     dp[s] = dp[s] || [];
-//     dp[s][pathLen] = dp[s][pathLen] || [];
-//     if (dp[s][pathLen].length > 0) {
+var restoreIpAddresses = function (s) {
+  if (!s || s.length < 4 || s.length > 3 * 4) return [];
+  const result = [];
+  const dp = [];
+  function dfs(s, path) {
+    const pathLen = path.split('.').length;
+    dp[s] = dp[s] || [];
+    dp[s][pathLen] = dp[s][pathLen] || [];
+    if (dp[s][pathLen].length > 0) {
 
-//       return result.push(...(dp[s][pathLen].map((item) => {
-//         item = item ? `.${item}` : item;
-//         return path + item;
-//       })));
-//     }
-//     if (path !== '' && s.length > 3 * (4 - pathLen) || (s === '' && pathLen < 4)) return;
-//     if (pathLen === 4) {
-//       dp[s][pathLen] = [''];
-//       return result.push(path);
-//     };
-//     for (let i = 0; i < Math.min(s.length, 3); i++) {
-//       const ipVal = s.slice(0, i + 1);
-//       if (Number(ipVal) > 255) return;
-//       if (ipVal.length > 1 && ipVal[0] === '0') return;
-//       const newPath = path === '' ? ipVal : path + '.' + ipVal;
-//       dfs(s.slice(i + 1), newPath);
+      return result.push(...(dp[s][pathLen].map((item) => {
+        item = item ? `.${item}` : item;
+        return path + item;
+      })));
+    }
+    if (path !== '' && s.length > 3 * (4 - pathLen) || (s === '' && pathLen < 4)) return;
+    if (pathLen === 4) {
+      dp[s][pathLen] = [''];
+      return result.push(path);
+    };
+    for (let i = 0; i < Math.min(s.length, 3); i++) {
+      const ipVal = s.slice(0, i + 1);
+      if (Number(ipVal) > 255) return;
+      if (ipVal.length > 1 && ipVal[0] === '0') return;
+      const newPath = path === '' ? ipVal : path + '.' + ipVal;
+      dfs(s.slice(i + 1), newPath);
 
-//       dp[s][pathLen].push(...((dp[s.slice(i + 1)][newPath.split('.').length] || []).map((item) => {
-//         item = item ? `.${item}` : item;
-//         return s.slice(0, i + 1) + item;
-//       })));
-//     }
-//   }
+      dp[s][pathLen].push(...((dp[s.slice(i + 1)][newPath.split('.').length] || []).map((item) => {
+        item = item ? `.${item}` : item;
+        return s.slice(0, i + 1) + item;
+      })));
+    }
+  }
 
-//   dfs(s, '');
+  dfs(s, '');
 
-//   return result;
-// };
+  return result;
+};
 
 /**
  * @description 利用返回值存储结果，中间特殊情况返回时，需要注意返回值
@@ -54,44 +54,44 @@
  * @return {string[]}
  */
 
-var restoreIpAddresses = function (s) {
-  if (!s || s.length < 4 || s.length > 3 * 4) return [];
-  const dp = [];
-  function dfs(s, path) {
-    let temp = [];
-    const pathLen = path.split('.').length;
-    dp[s] = dp[s] || [];
-    dp[s][pathLen] = dp[s][pathLen] || [];
-    if (dp[s][pathLen].length > 0) {
-      return dp[s][pathLen].map((item) => {
-        item = item ? `.${item}` : item;
-        return path + item;
-      });
-    }
-    if (path !== '' && s.length > 3 * (4 - pathLen) || (s === '' && pathLen < 4)) return temp;
-    if (pathLen === 4) {
-      dp[s][pathLen] = [''];
-      return [path];
-    };
-    for (let i = 0; i < Math.min(s.length, 3); i++) {
-      const ipVal = s.slice(0, i + 1);
-      if (Number(ipVal) > 255) return temp;
-      if (ipVal.length > 1 && ipVal[0] === '0') return temp;
-      const newPath = path === '' ? ipVal : path + '.' + ipVal;
-      const a = dfs(s.slice(i + 1), newPath);
-      temp.push(...a);
+// var restoreIpAddresses = function (s) {
+//   if (!s || s.length < 4 || s.length > 3 * 4) return [];
+//   const dp = [];
+//   function dfs(s, path) {
+//     let temp = [];
+//     const pathLen = path.split('.').length;
+//     dp[s] = dp[s] || [];
+//     dp[s][pathLen] = dp[s][pathLen] || [];
+//     if (dp[s][pathLen].length > 0) {
+//       return dp[s][pathLen].map((item) => {
+//         item = item ? `.${item}` : item;
+//         return path + item;
+//       });
+//     }
+//     if (path !== '' && s.length > 3 * (4 - pathLen) || (s === '' && pathLen < 4)) return temp;
+//     if (pathLen === 4) {
+//       dp[s][pathLen] = [''];
+//       return [path];
+//     };
+//     for (let i = 0; i < Math.min(s.length, 3); i++) {
+//       const ipVal = s.slice(0, i + 1);
+//       if (Number(ipVal) > 255) return temp;
+//       if (ipVal.length > 1 && ipVal[0] === '0') return temp;
+//       const newPath = path === '' ? ipVal : path + '.' + ipVal;
+//       const a = dfs(s.slice(i + 1), newPath);
+//       temp.push(...a);
 
-      dp[s][pathLen].push(...((dp[s.slice(i + 1)][newPath.split('.').length] || []).map((item) => {
-        item = item ? `.${item}` : item;
-        return s.slice(0, i + 1) + item;
-      })));
+//       dp[s][pathLen].push(...((dp[s.slice(i + 1)][newPath.split('.').length] || []).map((item) => {
+//         item = item ? `.${item}` : item;
+//         return s.slice(0, i + 1) + item;
+//       })));
 
-    }
-    return temp;
-  }
+//     }
+//     return temp;
+//   }
 
-  return dfs(s, '');
-};
+//   return dfs(s, '');
+// };
 
 
 console.log(restoreIpAddresses('25525511135')); // ["255.255.11.135","255.255.111.35"]
