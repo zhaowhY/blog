@@ -1,5 +1,5 @@
 /**
- * @description 考察 var和function的变量提升 var >  function
+ * @description 考察 var和function的变量声明提升  var 先于 function。 var属于声明提升（即undefined), 执行顺序不变，且执行时才赋值
  */
 
 
