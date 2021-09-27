@@ -5,15 +5,9 @@
 function throttle(func, delay = 120) {
   let timer = null;
   return function (...args) {
-    // 一段时间内第一次需要立即执行
-    if (timer === null) {
-      func.apply(this, args);
-      timer = false;
-      return;
-    }
     if (timer) return;
+    func.apply(this, args);
     timer = setTimeout(() => {
-      func.apply(this, args);
       timer = null;
     }, delay);
   };
