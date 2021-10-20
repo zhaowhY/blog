@@ -1,23 +1,35 @@
-/**
- * @description 考察 var和function的变量提升  var 先于 function。 var属于声明提升（即undefined), 执行顺序不变，且执行时才赋值
- */
 
- 
+let unique = (input) => {
+	if (!Array.isArray(input)) return null;
+	// 请补充逻辑, 不考虑undefined, function, symbol值的情况， 对象、数组暂时只考虑一级
+	const result = [];
+	const temp = {};
+	input.forEach((item) => {
+		let type = typeof item;
+		if (type === 'object') {
+			type = Object.prototype.toString.call(item); // [object Array]
+			if (type === '[object Array]' && !temp[JSON.stringify(item.sort())]) {
+				result.push(item);
+				temp[JSON.stringify(item.sort())] = true;
+			}
 
-console.log(func1, func2, func3);
+			if (type === '[object Object]') {
+				const arrTemp = [];
+				Object.keys(item).sort().forEach((key) => arrTemp.push([key, item[key]]));
+				if (!temp[JSON.stringify(arrTemp)]) {
+					result.push(item);
+					temp[JSON.stringify(arrTemp)] = true;
+				}
+			}
+		} else if (!temp[type + item]) {
+			result.push(item);
+			temp[type + item] = true;
+		}
+	});
 
-var func1 = function () {
-  console.log('func1');
+	return result;
 };
+//  预期结果 ==>  [1, "a", {b: 2}, {c: 3},[ 2 ], "1"]
+console.log(unique([1, "a", { b: 2 }, { c: 3 }, { b: 2 }, [2], [2], "1", "a"]));
 
 
-function func2() {
-  console.log('func2');
-}
-
-
-var func3 = 'func3';
-
-var func1, func2, func3;
-
-console.log(func1, func2, func3);

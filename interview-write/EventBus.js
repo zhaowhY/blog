@@ -4,31 +4,31 @@
 
 class EventBus {
   constructor() {
-    this.events = {}
+    this.events = {};
   }
 
   // 订阅
   on(name, fn) {
-    this.events[name] = this.events[name] || []
-    this.events[name].push(fn)
+    this.events[name] = this.events[name] || [];
+    this.events[name].push(fn);
   }
 
   // 发布
   emit(name, ...params) {
-    if (Object.prototype.toString.call(this.events[name]) !== "[object Array]") return
+    if (Object.prototype.toString.call(this.events[name]) !== "[object Array]") return;
 
     this.events[name].forEach(fn => {
-      fn(...params)
-    })
+      fn.apply(this, params);
+    });
   }
 }
 
 const temp1 = new EventBus();
 
 temp1.on('one', (...val) => {
-  console.log(...val) // 12
-})
+  console.log(...val); // 12
+});
 temp1.on('one', (...val) => {
-  console.log(val) // [1,2]
-})
-temp1.emit('one', 1, 2)
+  console.log(val); // [1,2]
+});
+temp1.emit('one', 1, 2);
