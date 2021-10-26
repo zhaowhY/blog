@@ -1,1 +1,0 @@
-new Array(3).map((item) => [1])

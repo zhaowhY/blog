@@ -5,7 +5,7 @@
 function machine() {
 
 }
-machine('robot').execute()
+machine('robot').execute();
 // start robot
 machine('robot').do('eat').execute();
 // start robot

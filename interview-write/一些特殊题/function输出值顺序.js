@@ -4,6 +4,7 @@
 
 
 console.log(func1, func2, func3);
+// undefined, [Function: func2], undefined
 
 var func1 = function () {
   console.log('func1');
@@ -18,3 +19,4 @@ var func3 = 'func3';
 var func1, func2, func3;
 
 console.log(func1, func2, func3);
+// [Function: func1] [Function: func2] func3

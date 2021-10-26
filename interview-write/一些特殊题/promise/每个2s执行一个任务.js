@@ -7,10 +7,10 @@ const delay = time => new Promise(resolve => setTimeout(resolve, time));
 const syncRun = async (eventQueue = []) => {
   for (const event of eventQueue) {
     await delay(2000).then(() => {
-      event()
+      event();
     });
   }
-}
+};
 
 syncRun([() => console.log(1), () => console.log(2)]);
 
@@ -36,7 +36,7 @@ createFlow([
 // 答案：
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const subFlow = createFlow([() => delay(1000).then(() => log("c"))]);
-const { log } = console
+const { log } = console;
 
 createFlow([
   () => log("a"),

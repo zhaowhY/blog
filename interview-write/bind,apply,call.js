@@ -1,3 +1,5 @@
+// 重点看bind
+
 /**
  * @description 实现apply
  */
@@ -7,7 +9,7 @@ Function.prototype.myapply = function (obj, params) {
     this(params);
     return;
   }
-  obj.fn = this;
+  obj.fn = this; // this是一个具体方法
   obj.fn(params);
 };
 
@@ -20,12 +22,12 @@ Function.prototype.mycall = function (obj, ...params) {
     this(params);
     return;
   }
-  obj.fn = this;
+  obj.fn = this; // this是一个具体方法
   obj.fn(...params);
 };
 
 
-/**
+/** bind 重点!!!
  * @description 实现bind
  */
 Function.prototype.mybind = function (obj, ...params) {
@@ -33,19 +35,12 @@ Function.prototype.mybind = function (obj, ...params) {
 
   const self = this;
 
-  // 37, 45, 46行三步, es5的原型继承，作用：1. 当Child() 时，this指向window, 2. 当new Child() 时， this instanceof Parent === true
-  let Parent = function () { };
-
-  let Child = function (...newParams) {
-    if (this instanceof Parent) return self(...params, ...newParams);
-    else if (!obj) return self(...params, ...newParams);
-
-    obj.fn = self;
-    return obj.fn(...params, ...newParams);
+  // 看继承，1. 执行this构建函数方法 2. prototype继承obj
+  const Child = function (...args) {
+    return self.call(obj, ...params, ...args);
   };
 
-  Parent.prototype = this.prototype;
-  Child.prototype = new Parent();
+  Child.prototype = Object.create(obj);
 
   return Child;
 };

@@ -18,7 +18,7 @@ class EventBus {
     if (Object.prototype.toString.call(this.events[name]) !== "[object Array]") return;
 
     this.events[name].forEach(fn => {
-      fn.apply(this, params);
+      fn(...params);
     });
   }
 }

@@ -22,56 +22,40 @@
 
 class LazyMan {
   constructor(name) {
-    this.name = name;
-    this.task = [() => { this.hello(); }];
+    this.funcs = [() => { console.log(` Hi! This is ${name}!`); this.next(); }];
     setTimeout(() => {
       this.next();
     }, 0);
   }
 
   next() {
-    if (this.task.length > 0) {
-      this.task.shift()();
-    }
-    return this;
+    const fn = this.funcs.shift();
+    if (typeof fn === 'function') fn();
   }
 
-  hello() {
-    console.log(`Hi This is ${this.name}!`);
-    this.next();
+  sleep(time) {
+    this.funcs.push(() => {
+      setTimeout(() => {
+        console.log(`Wake up after ${time}`);
+        this.next();
+      }, time);
+    });
     return this;
   }
-
-  sleep(delay) {
-    this.task.push(
-      () => {
-        setTimeout(() => {
-          console.log('Wake up after ' + delay);
-          this.next();
-        }, delay * 1000);
-      }
-    );
-    return this;
-
-  }
-
-  sleepFirst(delay) {
-    this.task.unshift(
-      () => {
-        setTimeout(() => {
-          console.log('Wake up after ' + delay);
-          this.next();
-        }, delay * 1000);
-      }
-    );
+  sleepFirst(time) {
+    this.funcs.splice(-1, 0, () => {
+      setTimeout(() => {
+        console.log(`Wake up after ${time}`);
+        this.next();
+      }, time);
+    });
     return this;
   }
 
   eat(food) {
-    this.task.push(() => {
-      console.log(`Eat ${food}!`);
+    this.funcs.push(() => {
+      console.log(`Eat ${food}`);
       this.next();
-
     });
     return this;
   }

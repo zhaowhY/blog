@@ -1,17 +1,18 @@
-const a = {}
-const b = Symbol('1')
-const c = Symbol('1')
-a[b] = '子君'
-a[c] = '君子'
+const a = {};
+const b = Symbol('1');
+const c = Symbol('1');
+a[b] = '子君';
+a[c] = '君子';
 
-console.log(a[b])
-const d = {}
-const e = { key: '1' }
-const f = { key: '2' }
-d[e] = '子君'
-d[f] = '君子'
+console.log(a[b]);
 
-console.log(d[e])
+const d = {};
+const e = { key: '1' };
+const f = { key: '2' };
+d[e] = '子君';
+d[f] = '君子';
+
+console.log(d[e]);;
 
 // 我是子君
 // 我是君子
