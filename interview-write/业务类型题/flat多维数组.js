@@ -12,7 +12,7 @@ function flat(data) {
   function dfs(data) {
     data.forEach(item => {
       if (Object.prototype.toString.call(item) === '[object Array]') {
-        dfs(item);
+        return dfs(item);
       } else {
         result.push(item);
       }

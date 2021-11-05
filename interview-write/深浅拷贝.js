@@ -25,7 +25,6 @@ let val = { a: { b: 2 } };
 console.log(val === shallowClone(val));
 console.log(val.a === shallowClone(val).a);
 
-
 /**
  * @description 深拷贝 递归浅拷贝 (对象和数组)
  */

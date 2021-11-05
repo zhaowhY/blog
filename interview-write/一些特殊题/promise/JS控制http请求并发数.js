@@ -21,7 +21,7 @@ class RequestLimit {
     }
     try {
       this.current++;
-      return await this.requestApi(...args);
+      await this.requestApi(...args);
     } catch (error) {
       return error;
     } finally {

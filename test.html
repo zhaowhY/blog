@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<style>
+  .box {
+    height: 200px;
+    width: 200px;
+    animation: 2s type forwards 2;
+    animation-play-state: running;
+  }
+
+  .box:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes type {
+    from {
+      background: blue
+    }
+
+    50% {
+      background: red
+    }
+
+    to {
+      background: blue
+    }
+  }
+</style>
+
+<head>
+  <!--  -->
+  <meta charset="utf-8">
+  <title>菜鸟教程(runoob.com)</title>
+
+<body>
+  <div id="aa"></div>
+</body>
+<script>
+  window.onload = () => {
+    setTimeout(() => {
+      document.querySelector('#aa').setAttribute('class', 'box')
+    }, 2000)
+
+  }
+</script>
+
+
+
+
+</html>
