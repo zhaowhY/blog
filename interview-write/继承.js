@@ -8,7 +8,7 @@
  */
 function myCreate(obj) {
   function F() { }
-  F.prototype = obj;
+  F.prototype = Object(obj);
   return new F();
 }
 

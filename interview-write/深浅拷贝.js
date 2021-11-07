@@ -27,6 +27,8 @@ console.log(val.a === shallowClone(val).a);
 
 /**
  * @description 深拷贝 递归浅拷贝 (对象和数组)
+ * @link https://juejin.cn/post/6844903929705136141#heading-6 深拷贝参考文章
+ * 可以考虑开辟一个new WeakMap 空间 解决循环引用的问题
  */
 
 function deepClone(obj) {

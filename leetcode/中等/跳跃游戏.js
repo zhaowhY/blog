@@ -7,15 +7,14 @@
  * @return {boolean}
  */
 var canJump = function (nums) {
-  const dp = new Array(nums.length).fill(0);
+  if (!Array.isArray(nums) || nums.length <= 1) return true;
+
   let max = nums[0];
-  if (max >= nums.length - 1) return true;
-  for (let i = 0; i <= max; i++) {
-    dp[i] = i + nums[i];
-    max = Math.max(max, dp[i]);
-
+  let i = 0;
+  while (i <= max) {
+    max = Math.max(max, i + nums[i]);
     if (max >= nums.length - 1) return true;
-
+    i++;
   }
   return false;
 };

@@ -1,5 +1,6 @@
-/** 做的比较失败，花费时间太长了
+/**
  * 贪心算法, 计算下一轮可以跳远的位置，然后跳到那个位置
+ * 贪心 + n段计算 不断求最大值
  * {@link https://leetcode-cn.com/problems/jump-game-ii/}
  */
 
@@ -8,25 +9,27 @@
  * @return {number}
  */
 var jump = function (nums) {
-  if (nums.length === 0) return 0;
-  let result = 0;
-
+  if (!Array.isArray(nums) || nums.length <= 1) return 0;
   let max = 0;
-  let i = 0;
-  while (i < nums.length - 1) {
-    const maxI = i + nums[i];
-    if (maxI >= nums.length - 1) return result + 1;
-    max = maxI;
-    for (let j = i + 1; j <= maxI; j++) {
-      if (j + nums[j] > max) {
-        i = j;
-        max = j + nums[j];
+  let num = 0;
+  let start = 0;
+  while (max < nums.length - 1) {
+    let temp = max;
+
+    for (let i = start; i <= max; i++) {
+      if ((i + nums[i]) > max) {
+        temp = Math.max(temp, i + nums[i]);
       }
     }
-    if (max > maxI) result++;
-    else return null; // 跳不到最后
+    if (temp > max) {
+      num++;
+      start = max + 1;
+      max = temp;
+    } else {
+      return false; // 不能跳到最后一个位置
+    }
   }
-  return result;
+  return num;
 };
 
 console.log(jump([2, 3, 1, 1, 4])); // 2

@@ -28,3 +28,4 @@ console.log(longestCommonSubsequence('mhunuzqrkzsnidwbun', 'szulspmhwpazoxijwbq'
 console.log(longestCommonSubsequence('bsbininm', 'jmjkbkjkv')); // 1
 console.log(longestCommonSubsequence('abc', 'def')); // 0
 console.log(longestCommonSubsequence('bl', 'yby')); // 1
+

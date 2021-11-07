@@ -1,6 +1,6 @@
 /**
  * @link https://leetcode-cn.com/problems/4sum-ii/
- * @description 归并思想+哈希存储， 将n 分为2,2,2,2， 然后不断合并，O(n2logn)
+ * @description  归并思想+哈希存储， 将n 分为2,2,2,2， 然后不断合并，O(n2logn)
  */
 
 /**
@@ -8,7 +8,7 @@
  * @param {number[]} nums2
  * @param {number[]} nums3
  * @param {number[]} nums4
- * @return {number}
+ * @return {number} 因为返回结果是数据，所以可以考虑使用对象的形式
  * 四个数组长度相同 6参考
  */
 var fourSumCount = function (nums1, nums2, nums3, nums4) {
