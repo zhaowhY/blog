@@ -15,6 +15,8 @@ function debounce(func, delay = 120) {
   };
 }
 
+// func.apply(this, args); 解释: obj.func = debounce(tempFunc, 700); 此时tempFunc this指向 obj
+
 
 // 验证函数正确性
 function tempFunc(...args) {
